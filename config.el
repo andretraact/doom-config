@@ -60,21 +60,6 @@
 ;; they are implemented.
 ;;
 ;; slack
-(use-package slack
-  :commands (slack-start)
-  :init
-  (setq slack-buffer-emojify t) ;; if you want to enable emoji, default nil
-  (setq slack-prefer-current-team t)
-  :config
-  (slack-register-team
-   :name "olivia"
-   :default t
-   :animate-image t
-   :modeline-enabled t
-   ;; try to remember to find a way to put this into a env var
-   :token "xoxs-10317139794-785774983168-1195691345665-83fb05e248b237c777bf859c37f8b8ab3a18df7732e9e2eb60b62e0bb0a2d929"
-   :subscribed-channels '())
-  )
 
 ; slack bindings
 (defun slack-send-region-as-code()
