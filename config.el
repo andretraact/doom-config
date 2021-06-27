@@ -19,27 +19,40 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "monospace" :size 14))
+(setq doom-font (font-spec :family "monospace" :size 19))
+(setq epg-gpg-program "gpg2")
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-gruvbox)
-(setq doom-line-numbers-style 'relative)
-
+(setq doom-theme 'doom-henna)
+(setq display-line-numbers-type 'relative)
+; disable S-SPC (ivy-restrict-to-matches)
+;    without this fix tryping space with shift pressed clears the input buffer while search for files
+;
+(after! ivy
+  (define-key ivy-minibuffer-map (kbd "S-SPC") '(lambda () (interactive) (insert " ")))
+  (define-key ivy-minibuffer-map (kbd "C-j") #'ivy-next-line)
+  (define-key ivy-minibuffer-map (kbd "C-k") #'ivy-previous-line)
+  (define-key evil-insert-state-map (kbd "C-j") #'ivy-next-line)
+  (define-key evil-insert-state-map (kbd "C-k") #'ivy-previous-line)
+  )
+;; (setq custom-set-faces
+;;   `(default :background "#000000" :bg-alt "#000000"))
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+;; (setq display-line-numbers-type t)
 (setq-hook! 'typescript-mode indent-tabs-mode t); typescript
 (setq indent-tabs-mode t)
-
+(setq dired-listing-switches "-alh --time-style \"+%m-%d-%Y %H:%M:%S\"")
 ; replace default rename symbol command
 (map! (:leader (:prefix "c" :desc "Rename" "r" #'tide-rename-symbol)))
 ; other stuff
+(setenv "GPG_AGENT_INFO" nil)
 (map! "M-[" 'indium-debugger-step-over)
 (map! "M-]" 'indium-debugger-step-into)
 ;; Here are some additional functions/macros that could help you configure Doom:

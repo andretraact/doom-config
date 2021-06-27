@@ -13,6 +13,13 @@
 (package! nimbus-theme)
 (package! indium)
 (package! slack)
+(package! forge)
+(package! evil-motion-trainer
+  :recipe
+  (:host github
+   :repo "martinbaillie/evil-motion-trainer"
+   :branch "master")
+  )
 ;; Doom's packages are pinned to a specific commit and updated from release to
 ;; release. The `unpin!' macro allows you to unpin single packages...
 ;(unpin! pinned-package)
