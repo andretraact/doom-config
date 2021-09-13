@@ -47,6 +47,7 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 ;; (setq display-line-numbers-type t)
 (setq-hook! 'typescript-mode indent-tabs-mode t); typescript
+(add-hook 'python-mode-hook 'anaconda-mode); anaconta-mode
 (setq indent-tabs-mode t)
 (setq dired-listing-switches "-alh --time-style \"+%m-%d-%Y %H:%M:%S\"")
 ; replace default rename symbol command
@@ -160,3 +161,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+;; (counsel-projectile-modify-action
+;;  'counsel-projectile-switch-project-action
+;;  '((default counsel-projectile-switch-project-action-vc)))

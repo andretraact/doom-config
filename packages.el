@@ -4,7 +4,9 @@
 ;; To install a package with Doom you must declare them here, run 'doom sync' on
 ;; the command line, then restart Emacs for the changes to take effect.
 ;; Alternatively, use M-x doom/reload.
-
+(when (featurep! :tools magit)
+  (package! magit-section)
+  (package! orgit :pin "e7cddf39e301c87c36c7de13e429dee74874d5c8"))
 (package! cyberpunk-theme)
 (package! ample-theme)
 (package! gruber-darker-theme)
