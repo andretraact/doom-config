@@ -19,8 +19,24 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "monospace" :size 19))
+(setq doom-font (font-spec :family "JetBrainsMono" :size 16 :weight 'light))
 (setq epg-gpg-program "gpg2")
+
+(setq evil-surround-pairs-alist
+  '((?\( . ("(" . " )"))
+    (?\[ . ("[ " . " ]"))
+    (?\{ . ("{ " . " }"))
+    (?\) . ("(" . ")"))
+    (?\] . ("[" . "]"))
+    (?\} . ("{" . "}"))
+    (?# . ("#{" . "}"))
+    (?s . ("${" . "}"))
+    (?b . ("(" . ")"))
+    (?B . ("{" . "}"))
+    (?> . ("<" . ">"))
+    (?t . evil-surround-read-tag)
+    (?< . evil-surround-read-tag)
+    (?f . evil-surround-function)))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -37,11 +53,16 @@
   (define-key evil-insert-state-map (kbd "C-j") #'ivy-next-line)
   (define-key evil-insert-state-map (kbd "C-k") #'ivy-previous-line)
   )
+
+(defadvice! fix-lookup-handlers (ret)
+  :filter-return '(+lsp-lookup-references-handler +lsp-lookup-definition-handler)
+  (when ret 'deferred))
 ;; (setq custom-set-faces
 ;;   `(default :background "#000000" :bg-alt "#000000"))
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
+
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -73,42 +94,7 @@
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
 ;;
-;; slack
 
-; slack bindings
-(defun slack-send-region-as-code()
-  (interactive)
-  (let* (
-         (team (slack-team-select))
-         (room (slack-room-select
-                (cl-loop for team in (list team)
-                         append (append (slack-team-ims team)
-                                        (slack-team-groups team)
-                                        (slack-team-channels team)))
-                team))
-         (msg (concat "```"(filter-buffer-substring (region-beginning) (region-end)) "```")))
-    (slack-message-send-internal msg room team)))
-(map! (:leader (:prefix "l"
-                :desc "seLect room" "l" #'slack-select-rooms
-                :desc "Search message" "s" #'slack-search-message
-                :desc "Threads" "t" #'slack-all-threads
-                :desc "Unread messages" "u" #'slack-all-unreads
-                :desc "open Direct message" "d" #'slack-im-select
-                :desc "open Channel" "h" #'slack-channel-select
-                :desc "upload Image (clipboard)" "i" #'slack-clipboard-image-upload
-                :desc "send region Code" "c" #'slack-send-region-as-code
-                :desc "write message (new buffer)" "w" #'slack-message-write-another-buffer
-                :desc "Edit message" "e" #'slack-message-edit
-                :desc "Goto Previous message" "p" #'slack-buffer-goto-prev-message
-                :desc "Goto Next message" "n" #'slack-buffer-goto-next-message
-                :desc "Goto Last message" "g" #'slack-buffer-goto-last-message
-                :desc "Goto First message" "f" #'slack-buffer-goto-first-message
-                :desc "Quit" "q" #'slack-ws-close
-                )))
-(map! (:after slack :map slack-mode-map
-       "^" #'slack-insert-emoji
-       "@" #'slack-message-embed-mention
-       "#" #'slack-message-embed-channel))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

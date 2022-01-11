@@ -14,8 +14,8 @@
 (package! leuven-theme)
 (package! nimbus-theme)
 (package! indium)
-(package! slack)
 (package! forge)
+(package! verb)
 (package! evil-motion-trainer
   :recipe
   (:host github
