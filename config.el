@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Andre de Oliveira"
-      user-mail-address "andre@olivia.ai")
+      user-mail-address "oliveira.andrede@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -19,7 +19,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "JetBrainsMono" :size 16 :weight 'light))
+(setq doom-font (font-spec :size 16))
 (setq epg-gpg-program "gpg2")
 
 (setq evil-surround-pairs-alist
@@ -41,7 +41,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-henna)
+(setq doom-theme 'doom-dracula)
 (setq display-line-numbers-type 'relative)
 ; disable S-SPC (ivy-restrict-to-matches)
 ;    without this fix tryping space with shift pressed clears the input buffer while search for files
@@ -94,13 +94,13 @@
 ;; they are implemented.
 ;;
 
+(require 'magit-todos)
 ;; DAP MODE STUFF
 
 (use-package typescript-mode
   :mode "\\.ts\\'"
   :hook (typescript-mode . lsp-deferred)
   :config
-  (setq typescript-indent-level 2)
   (require 'dap-node)
   (dap-node-setup))
 
