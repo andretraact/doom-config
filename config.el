@@ -19,7 +19,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :size 16))
+(setq doom-font (font-spec :family "JetbrainsMono Nerd Font" :size 14))
 (setq epg-gpg-program "gpg2")
 
 (setq evil-surround-pairs-alist
@@ -41,8 +41,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-dracula)
-(setq display-line-numbers-type 'relative)
+(setq doom-theme 'doom-dark+)
+;; (setq display-line-numbers-type 'relative)
 ; disable S-SPC (ivy-restrict-to-matches)
 ;    without this fix tryping space with shift pressed clears the input buffer while search for files
 ;
@@ -104,6 +104,19 @@
   (require 'dap-node)
   (dap-node-setup))
 
+(use-package! tsx-mode
+        :config
+        (setq auto-mode-alist (delete '("\\.tsx\\'" . typescript-tsx-mode) auto-mode-alist))
+        (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-mode)))
+
+;; accept completion from copilot and fallback to company
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

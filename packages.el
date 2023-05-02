@@ -24,7 +24,16 @@
    :repo "martinbaillie/evil-motion-trainer"
    :branch "master")
   )
+
 (package! dap-mode)
+(package! tsi :recipe (:host github :repo "orzechowskid/tsi.el" :branch "main"))
+(package! coverlay)
+(package! origami)
+(package! tsx-mode :recipe (:host github :repo "orzechowskid/tsx-mode.el" :branch "master"))
+
+(package! copilot
+  :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
+
 ;; Doom's packages are pinned to a specific commit and updated from release to
 ;; release. The `unpin!' macro allows you to unpin single packages...
 ;(unpin! pinned-package)
