@@ -19,7 +19,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "JetbrainsMono Nerd Font" :size 14))
+(setq doom-font (font-spec :family "JetbrainsMono Nerd Font" :size 15))
 (setq epg-gpg-program "gpg2")
 
 (setq evil-surround-pairs-alist
@@ -42,7 +42,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-dark+)
-;; (setq display-line-numbers-type 'relative)
+(setq display-line-numbers-type 'relative)
 ; disable S-SPC (ivy-restrict-to-matches)
 ;    without this fix tryping space with shift pressed clears the input buffer while search for files
 ;
@@ -173,3 +173,4 @@
 ;; (counsel-projectile-modify-action
 ;;  'counsel-projectile-switch-project-action
 ;;  '((default counsel-projectile-switch-project-action-vc)))
+(after! centaur-tabs (centaur-tabs-group-by-projectile-project))
